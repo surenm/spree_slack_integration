@@ -1,7 +1,11 @@
+require 'active_support/concern'
+
 Spree::Order.class_eval do
-  Spree::Order.state_machine.after_transition to: :complete, do: :trigger_slack_notification
+  after_save :trigger_slack_notification
 
   def trigger_slack_notification
-    puts "Triggering slack notification for order #{self.number}"
+    if self.state_changed? and self.state == "complete"
+      SlackNotificationWorker.perform_async(self.number)
+    end
   end
 end
