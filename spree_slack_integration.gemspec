@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = 'TODO: Add (optional) gem description here'
   s.required_ruby_version = '>= 1.9.3'
 
-  s.require_path = 'lib'
+  s.require_paths = ['lib', 'app/workers']
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 2.0.4'
