@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 2.0.4'
+  s.add_runtime_dependency 'slack-notifier', '~> 0.6.0'
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
