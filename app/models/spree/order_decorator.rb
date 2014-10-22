@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 Spree::Order.class_eval do
   after_save :trigger_slack_notification
 
