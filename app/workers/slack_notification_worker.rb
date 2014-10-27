@@ -2,6 +2,7 @@ require 'slack-notifier'
 
 class SlackNotificationWorker
   include Sidekiq::Worker
+  sidekiq_options :queue => :slack_notification
 
   def perform(order_number)
     order = Spree::Order.find_by_number(order_number)
