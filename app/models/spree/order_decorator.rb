@@ -15,10 +15,17 @@ Spree::Order.class_eval do
     end
   end
 
-  def slack_notification_message    
-    line_items_str = ""
-    self.line_items.each { |line_item| line_items_str += "\n#{line_item.variant.name}(#{line_item.quantity})" }
-    
-    "Order completed by #{user_display_format} for $#{self.total} with items #{line_items_str}"
+  def edit_admin_url
+    "#{ENV['SLACK_ADMIN_ORDER_URL']}/#{number}/edit"
+  end
+
+  def render_view(partial, assigns = {})
+    view = ActionView::Base.new(ActionController::Base.view_paths, assigns)
+    view.extend ApplicationHelper
+    view.render(:partial => partial)
+  end
+
+  def slack_notification_message
+    render_view('notification', order: self)
   end
 end

@@ -1,0 +1,4 @@
+Order <<%= @order.edit_admin_url %>|<%= @order.number %>> completed by <%= @order.user_display_format %> for $<%= @order.total %>  with items \n
+<% @order.line_items.each do |line_item| %>
+<%= line_item.variant.name %>(<%= line_item.quantity %>)
+<% end %>
